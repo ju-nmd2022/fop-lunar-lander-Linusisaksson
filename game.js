@@ -1,3 +1,5 @@
+//backround graphics/scenery functions for the game
+
 //State of games
 
 let state = "start";
