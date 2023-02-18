@@ -1,10 +1,96 @@
 //trying to see if i can call a function from another
 // js file into the main one so the code is less crowded
 
-// I also use this file to temporarily draw the graphics before adding
+// I also use this file to temporarily draw
+// the graphics before adding
 // them to the  main game
 
 //scenery
+function setup() {
+  createCanvas(700, 600);
+  background(255, 255, 255);
+}
+
+function man(manX, manY, size) {
+  //man with parachute
+  push();
+  //   translate(manX, manY);
+  scale(1);
+  strokeWeight(3 * size);
+
+  //parachute
+  push();
+  noStroke();
+  fill(120, 90, 70);
+  rect(manX - 10 * size, manY + 30 * size, 20 * size, 30 * size);
+  pop();
+  push();
+  strokeWeight(1.5);
+  stroke(238, 196, 165);
+  fill(255, 255, 255);
+  line(manX - 10 * size, manY + 30 * size, manX - 30 * size, manY - 40 * size);
+  line(manX - 10 * size, manY + 30 * size, manX - 20 * size, manY - 50 * size);
+  line(manX + 10 * size, manY + 30 * size, manX + 20 * size, manY - 50 * size);
+  line(manX + 10 * size, manY + 30 * size, manX + 30 * size, manY - 40 * size);
+  pop();
+
+  push();
+  beginShape();
+  fill(255, 0, 0);
+  vertex(manX - 30 * size, manY - 40 * size);
+  bezierVertex(
+    manX - 30 * size,
+    manY - 90 * size,
+    manX + 30 * size,
+    manY - 90 * size,
+    manX + 30 * size,
+    manY - 40 * size
+  );
+  bezierVertex(
+    manX + 30 * size,
+    manY - 60 * size,
+    manX - 30 * size,
+    manY - 60 * size,
+    manX - 30 * size,
+    manY - 40 * size
+  );
+  endShape();
+  pop();
+
+  //head
+  fill(255, 255, 255);
+  ellipse(manX, manY, 50 * size, 50 * size);
+  push();
+  fill(0, 0, 0);
+  noStroke();
+  ellipse(manX - 7 * size, manY, 8 * size);
+  ellipse(manX + 7 * size, manY, 8 * size);
+  beginShape();
+  vertex(manX - 10 * size, manY + 10 * size);
+  bezierVertex(
+    manX - 10 * size,
+    manY + 20 * size,
+    manX + 10 * size,
+    manY + 20 * size,
+    manX + 10 * size,
+    manY + 10 * size
+  );
+  endShape();
+  pop();
+
+  //body
+  line(manX, manY + 25 * size, manX, manY + 70 * size);
+  line(manX, manY + 70 * size, manX - 10 * size, manY + 100 * size);
+  line(manX, manY + 70 * size, manX + 10 * size, manY + 100 * size);
+
+  line(manX, manY + 40 * size, manX - 15 * size, manY + 45 * size);
+  line(manX - 15 * size, manY + 45 * size, manX - 10 * size, manY + 30 * size);
+
+  line(manX, manY + 40 * size, manX + 15 * size, manY + 45 * size);
+  line(manX + 15 * size, manY + 45 * size, manX + 10 * size, manY + 30 * size);
+
+  pop();
+}
 function scenery() {
   push();
   fill(118, 110, 223);
@@ -28,23 +114,8 @@ function skyscraper() {
   text("add windows later", 150, 200);
   pop();
 }
-
-scenery();
-skyscraper();
-
-//man with parachute
-scale(1);
-strokeWeight(3);
-
-//parachute
-fill(120, 90, 70);
-rect(390, 230, 20, 30);
-
-//head
-fill(255, 255, 255);
-ellipse(400, 200, 50, 50);
-
-//body
-line(400, 225, 400, 270);
-line(400, 270, 390, 300);
-line(400, 270, 410, 300);
+function draw() {
+  scenery();
+  skyscraper();
+  man(400, 100, 0.5);
+}

@@ -1,5 +1,8 @@
 //backround graphics/scenery functions for the game
-
+function setup() {
+  createCanvas(700, 600);
+  background(255, 255, 255);
+}
 //State of games
 
 let state = "start";
