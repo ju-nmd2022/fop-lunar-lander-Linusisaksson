@@ -14,8 +14,6 @@ function setup() {
 function man(manX, manY, size) {
   //man with parachute
   push();
-  //   translate(manX, manY);
-  scale(1);
   strokeWeight(3 * size);
 
   //parachute
@@ -58,24 +56,43 @@ function man(manX, manY, size) {
   pop();
 
   //head
+  //   fill(255, 255, 255);
+  //   ellipse(manX, manY, 50 * size, 50 * size);
+  //   push();
+  //   fill(0, 0, 0);
+  //   noStroke();
+  //   ellipse(manX - 7 * size, manY, 8 * size);
+  //   ellipse(manX + 7 * size, manY, 8 * size);
+  //   beginShape();
+  //   vertex(manX - 10 * size, manY + 10 * size);
+  //   bezierVertex(
+  //     manX - 10 * size,
+  //     manY + 20 * size,
+  //     manX + 10 * size,
+  //     manY + 20 * size,
+  //     manX + 10 * size,
+  //     manY + 10 * size
+  //   );
+  //   endShape();
+  //   pop();
+
+  //head blowing air
   fill(255, 255, 255);
   ellipse(manX, manY, 50 * size, 50 * size);
   push();
   fill(0, 0, 0);
   noStroke();
-  ellipse(manX - 7 * size, manY, 8 * size);
-  ellipse(manX + 7 * size, manY, 8 * size);
-  beginShape();
-  vertex(manX - 10 * size, manY + 10 * size);
-  bezierVertex(
-    manX - 10 * size,
-    manY + 20 * size,
-    manX + 10 * size,
-    manY + 20 * size,
-    manX + 10 * size,
-    manY + 10 * size
-  );
-  endShape();
+  ellipse(manX - 13 * size, manY - 10 * size, 8 * size);
+  ellipse(manX + 3 * size, manY - 15, 20 * size);
+  pop();
+
+  push();
+  strokeWeight(1);
+  stroke(255, 255, 255);
+  line(395, 170, 390, 150);
+  line(400, 169, 397, 150);
+  line(404, 169, 407, 150);
+  line(409, 170, 413, 150);
   pop();
 
   //body
@@ -117,5 +134,5 @@ function skyscraper() {
 function draw() {
   scenery();
   skyscraper();
-  man(400, 100, 0.5);
+  man(400, 200, 1);
 }

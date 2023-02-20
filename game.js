@@ -38,10 +38,6 @@ function LoseScreen() {
 function draw() {
   if (state === "start") {
     StartScreen();
-    // if (state === "start" && keyIsDown(32)) {
-    //   state === "game";
-    //   console.log("game");
-    // }
   } else if (state === "game") {
     GameScreen();
   } else if (state === "win") {
@@ -52,5 +48,9 @@ function draw() {
 }
 
 function keyPressed() {
-  state = "game";
+  console.log(keyCode);
+  if (state === "start" && keyCode === 32) {
+    state = "game";
+    console.log("game");
+  }
 }
