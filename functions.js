@@ -5,6 +5,9 @@
 // the graphics before adding
 // them to the  main game
 
+let manY = 100;
+let speed = 1;
+let acceleration = 0.2;
 //scenery
 function setup() {
   createCanvas(700, 600);
@@ -55,47 +58,47 @@ function man(manX, manY, size) {
   endShape();
   pop();
 
-  //head
-  //   fill(255, 255, 255);
-  //   ellipse(manX, manY, 50 * size, 50 * size);
-  //   push();
-  //   fill(0, 0, 0);
-  //   noStroke();
-  //   ellipse(manX - 7 * size, manY, 8 * size);
-  //   ellipse(manX + 7 * size, manY, 8 * size);
-  //   beginShape();
-  //   vertex(manX - 10 * size, manY + 10 * size);
-  //   bezierVertex(
-  //     manX - 10 * size,
-  //     manY + 20 * size,
-  //     manX + 10 * size,
-  //     manY + 20 * size,
-  //     manX + 10 * size,
-  //     manY + 10 * size
-  //   );
-  //   endShape();
-  //   pop();
-
-  //head blowing air
+  //   head;
   fill(255, 255, 255);
   ellipse(manX, manY, 50 * size, 50 * size);
   push();
   fill(0, 0, 0);
   noStroke();
-  ellipse(manX - 13 * size, manY - 10 * size, 8 * size);
-  ellipse(manX + 3 * size, manY - 15, 20 * size);
+  ellipse(manX - 7 * size, manY, 8 * size);
+  ellipse(manX + 7 * size, manY, 8 * size);
+  beginShape();
+  vertex(manX - 10 * size, manY + 10 * size);
+  bezierVertex(
+    manX - 10 * size,
+    manY + 20 * size,
+    manX + 10 * size,
+    manY + 20 * size,
+    manX + 10 * size,
+    manY + 10 * size
+  );
+  endShape();
   pop();
 
-  push();
-  strokeWeight(1);
-  stroke(255, 255, 255);
-  line(395, 170, 390, 150);
-  line(400, 169, 397, 150);
-  line(404, 169, 407, 150);
-  line(409, 170, 413, 150);
-  pop();
+  //head blowing air
+  //   fill(255, 255, 255);
+  //   ellipse(manX, manY, 50 * size, 50 * size);
+  //   push();
+  //   fill(0, 0, 0);
+  //   noStroke();
+  //   ellipse(manX - 13 * size, manY - 10 * size, 8 * size);
+  //   ellipse(manX + 3 * size, manY - 15 * size, 20 * size);
+  //   pop();
 
-  //body
+  //   push();
+  //   strokeWeight(1);
+  //   stroke(255, 255, 255);
+  //   line(manX - 5 * size, manY - 30 * size, manX - 10 * size, manY - 50 * size);
+  //   line(manX, manY - 31 * size, manX - 3 * size, manY - 50 * size);
+  //   line(manX + 4 * size, manY - 31 * size, manX + 6 * size, manY - 50 * size);
+  //   line(manX + 9 * size, manY - 30 * size, manX + 13 * size, manY - 50 * size);
+  //   pop();
+
+  //   //body
   line(manX, manY + 25 * size, manX, manY + 70 * size);
   line(manX, manY + 70 * size, manX - 10 * size, manY + 100 * size);
   line(manX, manY + 70 * size, manX + 10 * size, manY + 100 * size);
@@ -134,5 +137,12 @@ function skyscraper() {
 function draw() {
   scenery();
   skyscraper();
-  man(400, 200, 1);
+  man(400, manY, 0.4);
+
+  manY = manY + speed;
+  speed = speed + acceleration;
+
+  if (keyIsDown(38)) {
+    speed = speed - 0.5;
+  }
 }

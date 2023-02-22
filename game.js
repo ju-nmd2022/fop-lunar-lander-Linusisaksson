@@ -6,6 +6,9 @@ function setup() {
 //State of games
 
 let state = "start";
+let manY = 100;
+let speed = 1;
+let acceleration = 0.2;
 
 function StartScreen() {
   background(255, 200, 100);
@@ -15,7 +18,6 @@ function StartScreen() {
 
 //all code that is run when game is active
 function GameScreen() {
-  background(200, 200, 100);
   text("game is running", 200, 200);
   console.log("game is running");
 }
@@ -51,6 +53,6 @@ function keyPressed() {
   console.log(keyCode);
   if (state === "start" && keyCode === 32) {
     state = "game";
-    console.log("game");
+    // console.log("game");
   }
 }
