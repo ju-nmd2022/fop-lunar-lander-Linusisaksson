@@ -14,7 +14,7 @@ function setup() {
   background(255, 255, 255);
 }
 
-function man(manX, manY, size) {
+function man(manX, manY, size, blowingAir) {
   //man with parachute
   push();
   strokeWeight(3 * size);
@@ -58,45 +58,47 @@ function man(manX, manY, size) {
   endShape();
   pop();
 
+  if (blowingAir) {
+    // head blowing air
+    fill(255, 255, 255);
+    ellipse(manX, manY, 50 * size, 50 * size);
+    push();
+    fill(0, 0, 0);
+    noStroke();
+    ellipse(manX - 13 * size, manY - 10 * size, 8 * size);
+    ellipse(manX + 3 * size, manY - 15 * size, 20 * size);
+    pop();
+
+    push();
+    strokeWeight(1);
+    stroke(255, 255, 255);
+    line(manX - 5 * size, manY - 30 * size, manX - 10 * size, manY - 50 * size);
+    line(manX, manY - 31 * size, manX - 3 * size, manY - 50 * size);
+    line(manX + 4 * size, manY - 31 * size, manX + 6 * size, manY - 50 * size);
+    line(manX + 9 * size, manY - 30 * size, manX + 13 * size, manY - 50 * size);
+    pop();
+  } else {
+    fill(255, 255, 255);
+    ellipse(manX, manY, 50 * size, 50 * size);
+    push();
+    fill(0, 0, 0);
+    noStroke();
+    ellipse(manX - 7 * size, manY, 8 * size);
+    ellipse(manX + 7 * size, manY, 8 * size);
+    beginShape();
+    vertex(manX - 10 * size, manY + 10 * size);
+    bezierVertex(
+      manX - 10 * size,
+      manY + 20 * size,
+      manX + 10 * size,
+      manY + 20 * size,
+      manX + 10 * size,
+      manY + 10 * size
+    );
+    endShape();
+    pop();
+  }
   //   head;
-  fill(255, 255, 255);
-  ellipse(manX, manY, 50 * size, 50 * size);
-  push();
-  fill(0, 0, 0);
-  noStroke();
-  ellipse(manX - 7 * size, manY, 8 * size);
-  ellipse(manX + 7 * size, manY, 8 * size);
-  beginShape();
-  vertex(manX - 10 * size, manY + 10 * size);
-  bezierVertex(
-    manX - 10 * size,
-    manY + 20 * size,
-    manX + 10 * size,
-    manY + 20 * size,
-    manX + 10 * size,
-    manY + 10 * size
-  );
-  endShape();
-  pop();
-
-  //head blowing air
-  //   fill(255, 255, 255);
-  //   ellipse(manX, manY, 50 * size, 50 * size);
-  //   push();
-  //   fill(0, 0, 0);
-  //   noStroke();
-  //   ellipse(manX - 13 * size, manY - 10 * size, 8 * size);
-  //   ellipse(manX + 3 * size, manY - 15 * size, 20 * size);
-  //   pop();
-
-  //   push();
-  //   strokeWeight(1);
-  //   stroke(255, 255, 255);
-  //   line(manX - 5 * size, manY - 30 * size, manX - 10 * size, manY - 50 * size);
-  //   line(manX, manY - 31 * size, manX - 3 * size, manY - 50 * size);
-  //   line(manX + 4 * size, manY - 31 * size, manX + 6 * size, manY - 50 * size);
-  //   line(manX + 9 * size, manY - 30 * size, manX + 13 * size, manY - 50 * size);
-  //   pop();
 
   //   //body
   line(manX, manY + 25 * size, manX, manY + 70 * size);
@@ -137,12 +139,26 @@ function skyscraper() {
 function draw() {
   scenery();
   skyscraper();
-  man(400, manY, 0.4);
+  man(400, manY, 0.4, keyIsDown(38));
 
   manY = manY + speed;
   speed = speed + acceleration;
+  console.log(speed);
 
   if (keyIsDown(38)) {
     speed = speed - 0.5;
+  }
+  // manY is located in the center of the head so had to move up
+  // the point of impact a few pixels
+  if (manY >= 460 && speed > 3) {
+    speed = 0;
+    acceleration = 0;
+    acceleration = 0;
+    console.log("lose");
+  } else if (manY >= 460 && speed < 3) {
+    speed = 0;
+    acceleration = 0;
+    acceleration = 0;
+    console.log("win");
   }
 }
