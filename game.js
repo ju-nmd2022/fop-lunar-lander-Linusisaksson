@@ -1,5 +1,4 @@
-//State of games
-
+//State of games and starting logic of game
 let state = "start";
 let manY = 100;
 let speed = 1;
@@ -10,7 +9,7 @@ function setup() {
   createCanvas(700, 600);
   background(255, 255, 255);
 }
-
+//function for player and animation of player
 function man(manX, manY, size, blowingAir) {
   //man with parachute
   push();
@@ -133,23 +132,45 @@ function skyscraper() {
   text("add windows later", 150, 200);
   pop();
 }
+// head of man function for the winscreen
+function head(manX, manY, size) {
+  fill(255, 255, 255);
+  ellipse(manX, manY, 50 * size, 50 * size);
+  push();
+  fill(0, 0, 0);
+  noStroke();
+  ellipse(manX - 7 * size, manY, 8 * size);
+  ellipse(manX + 7 * size, manY, 8 * size);
+  beginShape();
+  vertex(manX - 10 * size, manY + 10 * size);
+  bezierVertex(
+    manX - 10 * size,
+    manY + 20 * size,
+    manX + 10 * size,
+    manY + 20 * size,
+    manX + 10 * size,
+    manY + 10 * size
+  );
+  endShape();
+  pop();
+}
 
 function StartScreen() {
-  background(255, 200, 100);
-  text(
-    "To start game press space. Use arrow up key to control speed",
-    100,
-    100
-  );
-  text("don't land too fast!", 100, 120);
+  scenery();
+  skyscraper();
+  man(290, 60, 0.4);
+  push();
 
-  //   console.log("startscreen is active");
+  fill(255, 255, 255);
+  textSize(20);
+  text("To start game press space.Use arrow up key to control speed", 200, 300);
+  text("don't land too fast!", 270, 320);
+  pop();
 }
 
 //all code that is run when game is active
 function GameScreen() {
   text("game is running", 200, 200);
-  console.log(state);
   scenery();
   skyscraper();
   man(400, manY, 0.4, keyIsDown(38));
@@ -164,7 +185,6 @@ function GameScreen() {
   // manY is located in the center of the head so had to move up
   // the point of impact a few pixels
   if (manY >= 460 && speed > 3) {
-    console.log("lose");
     speed = 1;
     acceleration = 0.2;
 
@@ -176,25 +196,33 @@ function GameScreen() {
 
     state = "win";
     manY = 100;
-    // console.log("win");
   }
 }
 //code that is run when you win
 function WinScreen() {
-  background(255, 255, 0);
-  text("you win", 250, 250);
-  console.log(state);
+  scenery();
+  skyscraper();
+  push();
+  scale(5);
+  head(110, 100, 1);
+  pop();
+
+  text("you win! Press space to play again", 250, 250);
 }
 //code that is run when you lose
 function LoseScreen() {
-  background(255, 50, 0);
-  text("you lose 💀", 300, 300);
-  console.log(state);
+  scenery();
+  skyscraper();
+  push();
+  translate(400, 500);
+  rotate(2);
+  translate(-400, -470);
+  man(400, 470, 0.4);
+  pop();
+  text("you lose 💀, press space to try again", 350, 400);
 }
-// StartScreen();
-// GameScreen();
-// WinScreen();
 
+// states
 function draw() {
   if (state === "start") {
     StartScreen();
@@ -207,8 +235,9 @@ function draw() {
   }
 }
 
+// chaning of states on "space" press depending on state
 function keyPressed() {
-  console.log(keyCode);
+  //   console.log(keyCode);
   if (state === "start" && keyCode === 32) {
     state = "game";
   } else if (state === "lose" && keyCode === 32) {
@@ -218,11 +247,3 @@ function keyPressed() {
     state = "game";
   }
 }
-
-// function keyPressed() {
-//   console.log(keyCode);
-//   if (state === "lose" && keyCode === 32) {
-//     state = "game";
-//     // console.log("game");
-//   }
-// }

@@ -1,8 +1,5 @@
-//trying to see if i can call a function from another
-// js file into the main one so the code is less crowded
-
-// I also use this file to temporarily draw
-// the graphics before adding
+// I use this file to temporarily draw
+// the graphics and test mechanics before adding
 // them to the  main game
 
 let manY = 100;
@@ -136,6 +133,12 @@ function skyscraper() {
   text("add windows later", 150, 200);
   pop();
 }
+
+function bird() {
+  ellipse();
+}
+function grave() {}
+ellipse();
 function draw() {
   scenery();
   skyscraper();
