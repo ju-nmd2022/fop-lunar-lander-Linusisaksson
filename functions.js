@@ -143,7 +143,7 @@ function draw() {
 
   manY = manY + speed;
   speed = speed + acceleration;
-  console.log(speed);
+  //   console.log(speed);
 
   if (keyIsDown(38)) {
     speed = speed - 0.5;
@@ -151,14 +151,14 @@ function draw() {
   // manY is located in the center of the head so had to move up
   // the point of impact a few pixels
   if (manY >= 460 && speed > 3) {
+    console.log("lose");
     speed = 0;
     acceleration = 0;
     acceleration = 0;
-    console.log("lose");
   } else if (manY >= 460 && speed < 3) {
     speed = 0;
     acceleration = 0;
     acceleration = 0;
-    console.log("win");
+    // console.log("win");
   }
 }
