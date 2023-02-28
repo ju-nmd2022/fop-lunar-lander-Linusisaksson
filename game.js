@@ -162,9 +162,10 @@ function StartScreen() {
   push();
 
   fill(255, 255, 255);
-  textSize(20);
-  text("To start game press space.Use arrow up key to control speed", 200, 300);
-  text("don't land too fast!", 270, 320);
+  textSize(18);
+  text("To start the game press Spacebar.", 389, 200);
+  text("Use arrow up key to control speed", 390, 220);
+  text("don't land too fast!", 450, 270);
   pop();
 }
 
@@ -187,13 +188,11 @@ function GameScreen() {
   if (manY >= 460 && speed > 3) {
     speed = 1;
     acceleration = 0.2;
-
     state = "lose";
     manY = 100;
   } else if (manY >= 460 && speed < 3) {
     speed = 1;
     acceleration = 0.2;
-
     state = "win";
     manY = 100;
   }
@@ -207,7 +206,15 @@ function WinScreen() {
   head(110, 100, 1);
   pop();
 
-  text("you win! Press space to play again", 250, 250);
+  push();
+
+  fill(255, 255, 255);
+  textSize(18);
+  text("You landed safely!", 350, 200);
+  text("press spacebar to play again!", 310, 220);
+  textSize(40);
+  text("I'm alive! 😃", 270, 450);
+  pop();
 }
 //code that is run when you lose
 function LoseScreen() {
@@ -219,7 +226,14 @@ function LoseScreen() {
   translate(-400, -470);
   man(400, 470, 0.4);
   pop();
-  text("you lose 💀, press space to try again", 350, 400);
+  push();
+
+  fill(255, 255, 255);
+  textSize(18);
+  text("You landed too fast 💀", 350, 400);
+  text("Press Spacebar to try again", 330, 420);
+
+  pop();
 }
 
 // states
