@@ -4,11 +4,14 @@ let manY = 100;
 let speed = 1;
 let acceleration = 0.2;
 
-//backround graphics/scenery functions for the game
+// canvas setup for html
 function setup() {
   createCanvas(700, 600);
+  frameRate(30);
   background(255, 255, 255);
 }
+//backround graphics/scenery functions for the game below
+
 //function for player and animation of player
 function man(manX, manY, size, blowingAir) {
   //man with parachute
@@ -188,6 +191,7 @@ function head(manX, manY, size) {
   pop();
 }
 
+// code running when launching the game
 function StartScreen() {
   scenery();
   skyscraper();
@@ -211,7 +215,6 @@ function GameScreen() {
 
   manY = manY + speed;
   speed = speed + acceleration;
-  //   console.log(speed);
 
   if (keyIsDown(38)) {
     speed = speed - 0.5;
